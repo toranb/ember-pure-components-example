@@ -1,0 +1,5 @@
+<h2 class="h2-name">{{model.name}}</h2>
+
+{{input class="detail-name" value=model.name placeholder="name"}}
+{{#validation-error-field submitted=submitted field="name" className="name-validation-error" model=model validation=nameValidation}}invalid name{{/validation-error-field}}
+<button {{action "save"}}>Save</button>

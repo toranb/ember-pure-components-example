@@ -1,0 +1,15 @@
+{{#each model key="@guid" as |customer index|}}
+<div class="customer-list-item">
+  <div>
+    {{input class="list-name" value=customer.name}}
+    {{#validation-error-field submitted=submitted field="name" model=customer index=index validation="name"}}invalid name{{/validation-error-field}}
+  </div>
+  <div>
+    {{#link-to "customers.customer" customer.id class="list-detail-link"}}{{customer.name}}{{/link-to}}
+  </div>
+</div>
+{{/each}}
+
+<button {{action "saveAll"}}>Save All</button>
+
+{{outlet}}
