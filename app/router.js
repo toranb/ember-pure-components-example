@@ -6,6 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+    this.route("complex-array");
     this.route("customers", { path: "/customers" }, function() {
         this.route("customer", { path: "/:customer_id" });
     });
