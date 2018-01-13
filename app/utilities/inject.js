@@ -1,3 +1,8 @@
-import inject from "ember-cli-injection/inject";
+import { computed } from '@ember/object';
+import { getOwner } from '@ember/application';
 
-export default inject("repositories");
+export default function(key) {
+  return computed(function() {
+    return getOwner(this).lookup(`repository:${key}`);
+  });
+};

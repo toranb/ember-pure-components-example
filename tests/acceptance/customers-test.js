@@ -11,21 +11,11 @@ var customers = [
 ];
 
 module('Acceptance: Customers', {
-  beforeEach: function() {
+  beforeEach() {
     application = startApp();
-    return Ember.$.fauxjax.new({
-        request: {
-            url: "/api/customers",
-            method: "GET"
-        },
-        response: {
-            status: 200,
-            content: customers
-        }
-    });
+    ajax('/api/customers', 'GET', 200, customers);
   },
-  afterEach: function() {
-    Ember.$.fauxjax.clear();
+  afterEach() {
     Ember.run(application, 'destroy');
   }
 });

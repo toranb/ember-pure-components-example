@@ -30,22 +30,13 @@ const TOS_ERROR_FIELD_MODEL_THREE = '.tos-parent-div span:eq(2)';
 const SAVE_BUTTON = 'button.save';
 
 module('Acceptance: Complex Array Form Test', {
-    setup: function() {
-        application = startApp();
-        return Ember.$.fauxjax.new({
-            request: {
-                url: "/api/people",
-                method: "GET"
-            },
-            response: {
-                status: 200,
-                content: people
-            }
-        });
-    },
-    teardown: function() {
-        Ember.run(application, 'destroy');
-    }
+  beforeEach() {
+    application = startApp();
+    ajax('/api/people', 'GET', 200, people);
+  },
+  afterEach() {
+    Ember.run(application, 'destroy');
+  }
 });
 
 test('multiple models can be validated independently', function(assert) {

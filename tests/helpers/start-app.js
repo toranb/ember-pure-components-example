@@ -1,18 +1,38 @@
-import Ember from 'ember';
 import Application from '../../app';
 import config from '../../config/environment';
+import { merge } from '@ember/polyfills';
+import { run, later } from '@ember/runloop';
+import { registerAsyncHelper } from '@ember/test';
+
+let unhandled = {};
+
+function interceptAjax(hash) {
+  let request = unhandled[hash.url];
+  let delay = request.responseTime || 0;
+  later(() => {
+    hash.success(request.response);
+  }, delay);
+}
+
+$.ajax = interceptAjax;
+
+function ajax(app, url, method, status, response, responseTime) {
+  run(function() {
+    unhandled[url] = {response: response, responseTime: responseTime};
+  });
+  return app.testHelpers.wait();
+}
+
+registerAsyncHelper('ajax', ajax);
 
 export default function startApp(attrs) {
-  let application;
+  let attributes = merge({}, config.APP);
+  attributes = merge(attributes, attrs); // use defaults, but you can override;
 
-  let attributes = Ember.merge({}, config.APP);
-  attributes = Ember.merge(attributes, attrs); // use defaults, but you can override;
-
-  Ember.run(() => {
-    application = Application.create(attributes);
+  return run(() => {
+    let application = Application.create(attributes);
     application.setupForTesting();
     application.injectTestHelpers();
+    return application;
   });
-
-  return application;
 }
