@@ -12,7 +12,7 @@ export default Ember.Component.extend(ValidationMixin, {
         save: function() {
             this.set("submitted", true);
             if(this.get("valid")) {
-                console.log("detail view save invoked");
+                console.log("detail view save invoked"); // eslint-disable-line
             }
         }
     }

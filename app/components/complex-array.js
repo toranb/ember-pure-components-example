@@ -23,7 +23,7 @@ export default Ember.Component.extend(ValidationMixin, {
         save: function() {
             this.set("submitted", true);
             if(this.get("valid")) {
-                console.log("complex view save invoked");
+                console.log("complex view save invoked"); // eslint-disable-line
             }
         }
     }

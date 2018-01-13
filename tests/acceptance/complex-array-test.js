@@ -32,7 +32,7 @@ const SAVE_BUTTON = 'button.save';
 module('Acceptance: Complex Array Form Test', {
   beforeEach() {
     application = startApp();
-    ajax('/api/people', 'GET', 200, people);
+    ajax('/api/people', 'GET', 200, people); // eslint-disable-line
   },
   afterEach() {
     Ember.run(application, 'destroy');

@@ -5,4 +5,4 @@ export default function(key) {
   return computed(function() {
     return getOwner(this).lookup(`repository:${key}`);
   });
-};
+}

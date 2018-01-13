@@ -13,7 +13,7 @@ var customers = [
 module('Acceptance: Customers', {
   beforeEach() {
     application = startApp();
-    ajax('/api/customers', 'GET', 200, customers);
+    ajax('/api/customers', 'GET', 200, customers); // eslint-disable-line
   },
   afterEach() {
     Ember.run(application, 'destroy');

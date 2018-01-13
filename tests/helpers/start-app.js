@@ -14,7 +14,7 @@ function interceptAjax(hash) {
   }, delay);
 }
 
-$.ajax = interceptAjax;
+$.ajax = interceptAjax; // eslint-disable-line
 
 function ajax(app, url, method, status, response, responseTime) {
   run(function() {
